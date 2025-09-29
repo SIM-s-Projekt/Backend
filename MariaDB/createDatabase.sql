@@ -1,13 +1,15 @@
-----------------------------------------------------------------------|
+-- --------------------------------------------------------------------|
 -- Author: Noah Jonsson, nojo2100@student.miun.se
 -- Version 1.0, Last changed on 2025-09-29 | 11:06
-----------------------------------------------------------------------|
+-- --------------------------------------------------------------------|
+
 -- Creation and choosing of the new DB
+DROP DATABASE IF EXISTS NobleScan;
 CREATE DATABASE NobleScan;
 
-USE NobleScan;
-
 SET SQL_SAFE_UPDATES=0;
+
+USE NobleScan;
 
 -- -- Drop tables if they already exist
 DROP TABLE IF EXISTS MEASUREMENT;
@@ -102,9 +104,6 @@ VALUES
 (10, 0, 10, 0.2200, '2025-09-22 12:00:00'),
 (11, 5, 5, 0.3000, '2025-09-25 08:00:00'),
 (12, 0, 0, 0.2600, '2025-09-28 09:00:00');
-
--- -- -- -- -- -- -- Select as current DB
-USE NobleScan;
 
 -- -- -- -- -- -- -- -- Example queries to see all tables and their content
 SHOW TABLES;
