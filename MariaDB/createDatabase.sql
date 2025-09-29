@@ -1,0 +1,110 @@
+----------------------------------------------------------------------|
+-- Author: Noah Jonsson, nojo2100@student.miun.se
+-- Version 1.0, Last changed on 2025-09-29 | 11:06
+----------------------------------------------------------------------|
+-- Creation and choosing of the new DB
+CREATE DATABASE NobleScan;
+
+USE NobleScan;
+
+SET SQL_SAFE_UPDATES=0;
+
+-- -- Drop tables if they already exist
+DROP TABLE IF EXISTS MEASUREMENT;
+DROP TABLE IF EXISTS MEASUREMENT_SERIES;
+DROP TABLE IF EXISTS BATCH;
+
+-- -- -- Create BATCH table
+CREATE TABLE BATCH (
+    BATCH_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    START_DATE DATE,
+    END_DATE DATE,
+    PLATE_COUNT INT,
+    COATING_REQUIREMENT DECIMAL(10,4),
+    COATING_TYPE VARCHAR(100),
+    PLATE_SURFACE_TYPE VARCHAR(100),
+    MATERIAL VARCHAR(100),
+    WIDTH INT,
+    HEIGHT INT,
+    THICKNESS DECIMAL(10,4)
+);
+
+-- -- -- -- Create MEASUREMENT_SERIES table
+CREATE TABLE MEASUREMENT_SERIES (
+    MEASUREMENT_SERIES_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    BATCH_ID INT NOT NULL,
+    COATING_ROUND INT,
+    FOREIGN KEY (BATCH_ID) REFERENCES BATCH(BATCH_ID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+-- -- -- -- -- Create MEASUREMENT table
+CREATE TABLE MEASUREMENT (
+    MEASUREMENT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    MEASUREMENT_SERIES_ID INT NOT NULL,
+    X_COORDINATE INT,
+    Y_COORDINATE INT,
+    CONCENTRATION_VALUE DECIMAL(10,4) NOT NULL,
+    MEASURED_AT TIMESTAMP,
+    FOREIGN KEY (MEASUREMENT_SERIES_ID) REFERENCES MEASUREMENT_SERIES(MEASUREMENT_SERIES_ID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+-- -- -- -- -- -- Insert example batches
+INSERT INTO BATCH (START_DATE, END_DATE, PLATE_COUNT, COATING_REQUIREMENT, COATING_TYPE, PLATE_SURFACE_TYPE, MATERIAL, WIDTH, HEIGHT, THICKNESS)
+VALUES 
+('2025-09-01', '2025-09-03', 50, 0.2500, 'Expensive', 'Smooth', 'Nickel', 100, 200, 1.5000),
+('2025-09-05', '2025-09-07', 30, 0.3000, 'Expensive', 'Mesh', 'Titanium', 80, 150, 2.0000),
+('2025-09-10', '2025-09-12', 40, 0.2000, 'Cheap', 'Smooth', 'Zinc', 120, 180, 1.8000),
+('2025-09-13', '2025-09-15', 60, 0.3500, 'Expensive', 'Smooth', 'Titanium', 110, 210, 1.6000),
+('2025-09-16', '2025-09-18', 25, 0.1500, 'Cheap', 'Mesh', 'Aluminum', 90, 170, 1.2000),
+('2025-09-19', '2025-09-21', 35, 0.2800, 'Expensive', 'Smooth', 'Nickel', 100, 190, 1.7000),
+('2025-09-22', '2025-09-24', 45, 0.2200, 'Cheap', 'Mesh', 'Titanium', 85, 160, 1.9000),
+('2025-09-25', '2025-09-27', 50, 0.3000, 'Expensive', 'Smooth', 'Titanium', 105, 200, 2.0000),
+('2025-09-28', '2025-09-30', 55, 0.2600, 'Cheap', 'Mesh', 'Aluminum', 95, 180, 1.5000);
+
+INSERT INTO MEASUREMENT_SERIES (BATCH_ID, COATING_ROUND)
+VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 1),
+(3, 2),
+(4, 1),
+(4, 2),
+(5, 1),
+(6, 1),
+(6, 2),
+(7, 1),
+(8, 1),
+(8, 2),
+(9, 1);
+
+INSERT INTO MEASUREMENT (MEASUREMENT_SERIES_ID, X_COORDINATE, Y_COORDINATE, CONCENTRATION_VALUE, MEASURED_AT)
+VALUES
+(1, 0, 0, 0.1234, '2025-09-01 08:00:00'),
+(1, 10, 0, 0.1250, '2025-09-01 08:05:00'),
+(1, 0, 10, 0.1240, '2025-09-01 08:10:00'),
+(2, 0, 0, 0.1280, '2025-09-02 09:00:00'),
+(2, 10, 0, 0.1275, '2025-09-02 09:05:00'),
+(3, 0, 0, 0.3000, '2025-09-05 10:00:00'),
+(4, 5, 5, 0.2050, '2025-09-10 11:00:00'),
+(5, 10, 10, 0.2100, '2025-09-11 12:00:00'),
+(6, 0, 0, 0.3500, '2025-09-13 08:00:00'),
+(6, 10, 0, 0.3550, '2025-09-13 08:05:00'),
+(7, 0, 0, 0.3450, '2025-09-14 09:00:00'),
+(7, 10, 10, 0.3480, '2025-09-14 09:10:00'),
+(8, 5, 5, 0.1500, '2025-09-16 10:00:00'),
+(9, 0, 0, 0.2800, '2025-09-19 11:00:00'),
+(9, 10, 0, 0.2825, '2025-09-19 11:05:00'),
+(10, 0, 10, 0.2200, '2025-09-22 12:00:00'),
+(11, 5, 5, 0.3000, '2025-09-25 08:00:00'),
+(12, 0, 0, 0.2600, '2025-09-28 09:00:00');
+
+-- -- -- -- -- -- -- Select as current DB
+USE NobleScan;
+
+-- -- -- -- -- -- -- -- Example queries to see all tables and their content
+SHOW TABLES;
