@@ -1,6 +1,6 @@
 -- --------------------------------------------------------------------|
 -- Author: Noah Jonsson, nojo2100@student.miun.se
--- Version 1.0, Last changed on 2025-09-29 | 11:06
+-- Version 1.0, Last changed on 2025-09-29 | 11:48
 -- --------------------------------------------------------------------|
 
 -- Creation and choosing of the new DB
