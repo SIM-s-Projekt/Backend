@@ -54,18 +54,17 @@ public class LoadDB {
 
 				exampleMeasurementSeries2 = new MeasurementSeries(exampleBatch1, i);
 				measurementSeriesRepository.save(exampleMeasurementSeries2);
+				//-- -- Inserting example measurements -- --
+				for (int j = 0; j < 5; j++) {
+					Measurement exampleMeasurement1 = new Measurement(exampleMeasurementSeries1, 0, 10,
+							new BigDecimal("9.23"), LocalDateTime.now());
+					measurementRepository.save(exampleMeasurement1);
+					Measurement exampleMeasurement2 = new Measurement(exampleMeasurementSeries2, 23, 19,
+							new BigDecimal("11.13"), LocalDateTime.now());
+					measurementRepository.save(exampleMeasurement2);
+				}
 			}
 			log.info("- MeasurementSeries created!");
-
-			//-- -- Inserting example measurements -- --
-			for (int i = 0; i < 64; i++) {
-				Measurement exampleMeasurement1 = new Measurement(exampleMeasurementSeries1, 0, 10,
-						new BigDecimal("9.23"), LocalDateTime.now());
-				measurementRepository.save(exampleMeasurement1);
-				Measurement exampleMeasurement2 = new Measurement(exampleMeasurementSeries1, 23, 19,
-						new BigDecimal("11.13"), LocalDateTime.now());
-				measurementRepository.save(exampleMeasurement2);
-			}
 			log.info("- Measurements created!");
 			log.info("Example data created!");
 		};
