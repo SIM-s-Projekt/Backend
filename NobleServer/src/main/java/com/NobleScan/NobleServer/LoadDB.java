@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Configuration
 public class LoadDB {
@@ -19,6 +20,8 @@ public class LoadDB {
 
 		return args -> {
 			log.info("Creating example data...");
+
+			//-- -- Inserting example batches -- --
 			Batch exampleBatch0 = new Batch(
 					"Platinum/Gold",
 					"Titanium",
@@ -41,6 +44,29 @@ public class LoadDB {
 			);
 			batchRepository.save(exampleBatch0);
 			batchRepository.save(exampleBatch1);
+			log.info("- Batches created!");
+
+			//-- -- Inserting example measurement series -- --
+			MeasurementSeries exampleMeasurementSeries1 = new MeasurementSeries(), exampleMeasurementSeries2 = new MeasurementSeries();
+			for (int i = 0; i < 4; i++) {
+				exampleMeasurementSeries1 = new MeasurementSeries(exampleBatch0, i);
+				measurementSeriesRepository.save(exampleMeasurementSeries1);
+
+				exampleMeasurementSeries2 = new MeasurementSeries(exampleBatch1, i);
+				measurementSeriesRepository.save(exampleMeasurementSeries2);
+			}
+			log.info("- MeasurementSeries created!");
+
+			//-- -- Inserting example measurements -- --
+			for (int i = 0; i < 64; i++) {
+				Measurement exampleMeasurement1 = new Measurement(exampleMeasurementSeries1, 0, 10,
+						new BigDecimal("9.23"), LocalDateTime.now());
+				measurementRepository.save(exampleMeasurement1);
+				Measurement exampleMeasurement2 = new Measurement(exampleMeasurementSeries1, 23, 19,
+						new BigDecimal("11.13"), LocalDateTime.now());
+				measurementRepository.save(exampleMeasurement2);
+			}
+			log.info("- Measurements created!");
 			log.info("Example data created!");
 		};
 	}

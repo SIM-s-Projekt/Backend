@@ -22,6 +22,14 @@ public class MeasurementSeries {
 	@OneToMany(mappedBy = "measurementSeries", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Measurement> measurements;
 
+	//Constructors
+	public MeasurementSeries(){};
+
+	public MeasurementSeries(Batch batch, Integer coatingRound) {
+		this.batch = batch;
+		this.coatingRound = coatingRound;
+	}
+
 	// Getters and Setters
 
 	public Integer getMeasurementSeriesId() {

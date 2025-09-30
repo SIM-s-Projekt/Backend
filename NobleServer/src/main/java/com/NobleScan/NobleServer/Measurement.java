@@ -29,6 +29,18 @@ public class Measurement {
 	@Column(name = "MEASURED_AT")
 	private LocalDateTime measuredAt;
 
+	//Constructor
+	public Measurement() {};
+
+	public Measurement(MeasurementSeries measurementSeries, Integer xCoordinate, Integer yCoordinate,
+			BigDecimal concentrationValue, LocalDateTime measuredAt) {
+		this.measurementSeries = measurementSeries;
+		this.xCoordinate = xCoordinate;
+		this.yCoordinate = yCoordinate;
+		this.concentrationValue = concentrationValue;
+		this.measuredAt = measuredAt;
+	}
+
 	// Getters and Setters
 	public Integer getMeasurementId() {
 		return measurementId;
