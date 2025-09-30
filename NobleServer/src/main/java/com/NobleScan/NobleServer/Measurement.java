@@ -1,5 +1,6 @@
 package com.NobleScan.NobleServer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class Measurement {
 	private Integer measurementId;
 
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "MEASUREMENT_SERIES_ID", nullable = false)
 	private MeasurementSeries measurementSeries;
 

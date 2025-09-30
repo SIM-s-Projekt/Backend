@@ -1,5 +1,7 @@
 package com.NobleScan.NobleServer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class MeasurementSeries {
 	private Integer measurementSeriesId;
 
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "BATCH_ID", nullable = false)
 	private Batch batch;
 
@@ -20,6 +23,7 @@ public class MeasurementSeries {
 	private Integer coatingRound;
 
 	@OneToMany(mappedBy = "measurementSeries", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<Measurement> measurements;
 
 	//Constructors

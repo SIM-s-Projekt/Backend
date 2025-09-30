@@ -1,5 +1,6 @@
 package com.NobleScan.NobleServer;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -47,6 +48,7 @@ public class Batch {
 	private BigDecimal thickness;
 
 	@OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<MeasurementSeries> measurementSeries;
 
 	public Batch() {}
