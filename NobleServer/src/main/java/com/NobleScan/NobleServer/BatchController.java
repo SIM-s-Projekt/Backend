@@ -21,7 +21,7 @@ public class BatchController {
 
 	@GetMapping("/batch/{id}")
 	Batch one(@PathVariable Integer id){
-		return batchRepository.findById(id).orElse(null);
+		return batchRepository.findById(id).orElseThrow(() -> new BatchNotFoundException(id));
 	}
 
 }
