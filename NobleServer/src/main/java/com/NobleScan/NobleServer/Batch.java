@@ -49,6 +49,18 @@ public class Batch {
 	@OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<MeasurementSeries> measurementSeries;
 
+	public Batch(String coatingType, String material, BigDecimal coatingRequirement, Integer height,
+			Integer width, BigDecimal thickness, Integer plateCount, String plateSurfaceType) {
+		this.coatingType = coatingType;
+		this.material = material;
+		this.coatingRequirement = coatingRequirement;
+		this.height = height;
+		this.width = width;
+		this.thickness = thickness;
+		this.plateCount = plateCount;
+		this.plateSurfaceType = plateSurfaceType;
+	}
+
 	// Getters and Setters
 
 	public Integer getBatchId() {
