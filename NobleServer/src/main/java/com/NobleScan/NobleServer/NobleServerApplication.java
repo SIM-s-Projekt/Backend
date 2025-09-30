@@ -9,5 +9,5 @@ public class NobleServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NobleServerApplication.class, args);
 	}
-		
+
 }
