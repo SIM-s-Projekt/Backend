@@ -2,8 +2,12 @@ package com.NobleScan.NobleServer;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -17,10 +21,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class MeasurementController {
 	private final MeasurementRepository measurementRepository;
 	private final MeasurementAssembler assembler;
+	//Also needs connected measurementSeries
+	private final MeasurementSeriesRepository measurementSeriesRepository;
 
-	public MeasurementController(MeasurementRepository measurementRepository, MeasurementAssembler assembler) {
+	public MeasurementController(MeasurementRepository measurementRepository, MeasurementAssembler assembler,
+			MeasurementSeriesRepository measurementSeriesRepository) {
 		this.measurementRepository = measurementRepository;
 		this.assembler = assembler;
+		this.measurementSeriesRepository = measurementSeriesRepository;
 	}
 
 	// Aggregate root
@@ -32,7 +40,7 @@ public class MeasurementController {
 
 		return CollectionModel.of(measurements,
 				linkTo(methodOn(MeasurementController.class).all()).withSelfRel());
-		
+
 	}
 	// end::get-aggregate-root[]
 
@@ -43,4 +51,16 @@ public class MeasurementController {
 		return assembler.toModel(measurement);
 	}
 
+	@PostMapping("/measurements/{seriesId}")
+	ResponseEntity<EntityModel<Measurement>> newMeasurement(@RequestBody Measurement newMeasurement, @PathVariable Integer seriesId) {
+		MeasurementSeries series = measurementSeriesRepository.findById(seriesId).orElseThrow(() -> new MeasurementSeriesNotFoundException(seriesId));
+		newMeasurement.setMeasurementSeries(series);
+
+		EntityModel<Measurement> entityModel = assembler.toModel(measurementRepository.save(newMeasurement));
+
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+				.body(entityModel);
+
+	}
 }
