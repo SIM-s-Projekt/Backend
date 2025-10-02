@@ -1,4 +1,4 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.REST;
 
 public class BatchNotFoundException extends RuntimeException{
 	BatchNotFoundException(Integer id) {

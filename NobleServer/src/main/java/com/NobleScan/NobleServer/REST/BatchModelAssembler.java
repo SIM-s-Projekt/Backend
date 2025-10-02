@@ -1,4 +1,4 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.REST;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.hateoas.EntityModel;

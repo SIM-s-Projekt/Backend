@@ -1,6 +1,5 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.REST;
 
-import com.NobleScan.NobleServer.MeasurementSeries;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

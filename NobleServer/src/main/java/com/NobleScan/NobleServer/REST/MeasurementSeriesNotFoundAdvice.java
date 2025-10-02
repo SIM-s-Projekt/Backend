@@ -1,4 +1,4 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.REST;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

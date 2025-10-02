@@ -1,4 +1,4 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.REST;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

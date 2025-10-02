@@ -1,4 +1,4 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.REST;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
