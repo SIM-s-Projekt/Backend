@@ -1,6 +1,6 @@
 -- --------------------------------------------------------------------|
 -- Author: Noah Jonsson, nojo2100@student.miun.se
--- Version 1.0, Last changed on 2025-09-29 | 11:48
+-- Version 2.0, Last changed on 2025-10-03
 -- --------------------------------------------------------------------|
 
 -- Creation and choosing of the new DB
@@ -15,6 +15,8 @@ USE NobleScan;
 DROP TABLE IF EXISTS MEASUREMENT;
 DROP TABLE IF EXISTS MEASUREMENT_SERIES;
 DROP TABLE IF EXISTS BATCH;
+
+DROP TABLE IF EXISTS SETTING;
 
 -- -- -- Create BATCH table
 CREATE TABLE BATCH (
@@ -52,6 +54,12 @@ CREATE TABLE MEASUREMENT (
     FOREIGN KEY (MEASUREMENT_SERIES_ID) REFERENCES MEASUREMENT_SERIES(MEASUREMENT_SERIES_ID)
         ON UPDATE CASCADE
         ON DELETE CASCADE
+);
+
+CREATE TABLE SETTING (
+    SETTING_KEY VARCHAR(100) NOT NULL PRIMARY KEY,
+    SETTING_VALUE VARCHAR(100) NOT NULL,
+    LAST_UPDATED TIMESTAMP NOT NULL
 );
 
 -- -- -- -- -- -- Insert example batches
@@ -104,6 +112,10 @@ VALUES
 (10, 0, 10, 0.2200, '2025-09-22 12:00:00'),
 (11, 5, 5, 0.3000, '2025-09-25 08:00:00'),
 (12, 0, 0, 0.2600, '2025-09-28 09:00:00');
+
+INSERT INTO SETTING (SETTING_KEY, SETTING_VALUE, LAST_UPDATED)
+VALUES
+('UNIT', 'MM', '2025-09-28 09:00:00');
 
 -- -- -- -- -- -- -- -- Example queries to see all tables and their content
 SHOW TABLES;
