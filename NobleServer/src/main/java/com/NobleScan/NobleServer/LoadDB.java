@@ -6,6 +6,8 @@ import com.NobleScan.NobleServer.Entities.Measurement;
 import com.NobleScan.NobleServer.Entities.MeasurementRepository;
 import com.NobleScan.NobleServer.Entities.MeasurementSeries;
 import com.NobleScan.NobleServer.Entities.MeasurementSeriesRepository;
+import com.NobleScan.NobleServer.Entities.Setting;
+import com.NobleScan.NobleServer.Entities.SettingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +24,8 @@ public class LoadDB {
 	@Bean
 	CommandLineRunner initDatabase(BatchRepository batchRepository,
 									MeasurementRepository measurementRepository,
-									MeasurementSeriesRepository measurementSeriesRepository) {
+									MeasurementSeriesRepository measurementSeriesRepository,
+									SettingRepository settingRepository) {
 
 		return args -> {
 			log.info("Creating example data...");
@@ -73,6 +76,13 @@ public class LoadDB {
 			log.info("- MeasurementSeries created!");
 			log.info("- Measurements created!");
 			log.info("Example data created!");
+
+			// Creating example settings
+			settingRepository.save(new Setting("Unit", "mm"));
+			settingRepository.save(new Setting("MotorSpeed", "20 m/s"));
+			settingRepository.save(new Setting("Timeout threshold", "60 seconds"));
+			settingRepository.save(new Setting("Port number", "8080"));
+			settingRepository.save(new Setting("API address", "localhost"));
 		};
 	}
 }
