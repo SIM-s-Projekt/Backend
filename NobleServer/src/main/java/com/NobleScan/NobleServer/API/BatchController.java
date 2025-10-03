@@ -1,10 +1,11 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.API;
 
+import com.NobleScan.NobleServer.Entities.Batch;
+import com.NobleScan.NobleServer.Entities.BatchRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

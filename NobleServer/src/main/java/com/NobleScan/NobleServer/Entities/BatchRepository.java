@@ -1,6 +1,5 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.Entities;
 
-import com.NobleScan.NobleServer.Batch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

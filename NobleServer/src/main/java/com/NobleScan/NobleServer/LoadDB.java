@@ -1,5 +1,11 @@
 package com.NobleScan.NobleServer;
 
+import com.NobleScan.NobleServer.Entities.Batch;
+import com.NobleScan.NobleServer.Entities.BatchRepository;
+import com.NobleScan.NobleServer.Entities.Measurement;
+import com.NobleScan.NobleServer.Entities.MeasurementRepository;
+import com.NobleScan.NobleServer.Entities.MeasurementSeries;
+import com.NobleScan.NobleServer.Entities.MeasurementSeriesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

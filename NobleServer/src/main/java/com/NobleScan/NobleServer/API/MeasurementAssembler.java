@@ -1,5 +1,6 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.API;
 
+import com.NobleScan.NobleServer.Entities.Measurement;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

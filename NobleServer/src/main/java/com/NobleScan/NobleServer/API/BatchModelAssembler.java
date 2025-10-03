@@ -1,6 +1,8 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.API;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+import com.NobleScan.NobleServer.Entities.Batch;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

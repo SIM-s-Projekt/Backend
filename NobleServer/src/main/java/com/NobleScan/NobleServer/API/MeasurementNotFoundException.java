@@ -1,4 +1,4 @@
-package com.NobleScan.NobleServer;
+package com.NobleScan.NobleServer.API;
 
 public class MeasurementNotFoundException extends RuntimeException {
 	public MeasurementNotFoundException(Integer id) {
